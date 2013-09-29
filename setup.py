@@ -20,6 +20,7 @@ classifiers = [
 ]
 py_modules = ['commonsdownloader']
 scripts = ['download_from_Wikimedia_Commons.py']
+requires = ['argparse']
 
 setup(
       name='CommonsDownloader',
@@ -32,5 +33,6 @@ setup(
       license='MIT',
       py_modules=py_modules,
       scripts=scripts,
+      install_requires=requires,
       classifiers=classifiers
 )
