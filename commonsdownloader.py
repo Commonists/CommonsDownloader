@@ -37,7 +37,7 @@ def get_thumbnail_of_file(image_name, width):
         extension = opened.headers.subtype
         return opened.read(), make_thumbnail_name(image_name, extension)
     except urllib2.HTTPError, e:
-        print e.fp.read()
+        raise Exception(e.fp.read())
 
 
 def download_file(image_name, output_path, width=DEFAULT_WIDTH):
