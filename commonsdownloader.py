@@ -48,3 +48,4 @@ def download_file(image_name, output_path, width=DEFAULT_WIDTH):
     output_file_path = os.path.join(output_path, output_file_name)
     with open(output_file_path, 'w') as f:
         f.write(contents)
+    return output_file_path
