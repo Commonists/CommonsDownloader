@@ -53,6 +53,11 @@ Alternatively, you can clone the repository and install it using `setuptools`:
 This will install the executable script `download_from_Wikimedia_Commons.py`
 
 
+Build status
+------------
+[![Build Status](https://secure.travis-ci.org/JeanFred/CommonsDownloader.png)](http://travis-ci.org/JeanFred/CommonsDownloader)
+
+
 License
 -------
 MIT license
