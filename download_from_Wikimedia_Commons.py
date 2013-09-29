@@ -57,18 +57,16 @@ def main():
                         type=int,
                         default=100,
                         help='The width of the thumbnail (default: 100)')
-    parser.add_argument("-v", "--verbose",
-                        action="store_true",
+    parser.add_argument("-v",
+                        action="count",
                         dest="verbose",
-                        default=False,
-                        help="Displays INFO messages")
+                        default=0,
+                        help="Verbosity level. -v for INFO, -vv for DEBUG")
     args = parser.parse_args()
-
-    if args.verbose:
-        log_level = logging.INFO
-    else:
-        log_level = logging.WARNING
-    logging.basicConfig(level=log_level)
+    logging_map = {0: logging.WARNING,
+                   1: logging.INFO,
+                   2: logging.DEBUG}
+    logging.basicConfig(level=logging_map[args.verbose])
     logging.info("Starting")
 
     if args.file_list:
