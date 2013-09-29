@@ -33,6 +33,7 @@ def get_thumbnail_of_file(image_name, width):
     url = make_thumb_url(image_name, width)
     req = urllib2.Request(url, headers=hdr)
     try:
+        logging.debug("Retrieving %s" % url)
         opened = urllib2.urlopen(req)
         extension = opened.headers.subtype
         return opened.read(), make_thumbnail_name(image_name, extension)
@@ -47,5 +48,6 @@ def download_file(image_name, output_path, width=DEFAULT_WIDTH):
     contents, output_file_name = get_thumbnail_of_file(image_name, width)
     output_file_path = os.path.join(output_path, output_file_name)
     with open(output_file_path, 'w') as f:
+        logging.debug("Writing as %s" % output_file_path)
         f.write(contents)
     return output_file_path
