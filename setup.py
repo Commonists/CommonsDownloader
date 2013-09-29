@@ -28,6 +28,7 @@ setup(
       author_email='JeanFred@github',
       url='http://github.com.org/JeanFred/CommonsDownloader',
       description='Download thumbnails from Wikimedia Commons',
+      long_description=open('README.md').read(),
       license='MIT',
       py_modules=py_modules,
       scripts=scripts,
