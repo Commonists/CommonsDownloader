@@ -55,5 +55,11 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
             output = commonsdownloader.get_thumbnail_of_file(*input_value)
             self.assertEqual(output, expected_value)
 
+    def test_get_thumbnail_of_file_error(self):
+        """Test get_thumbnail_of_file with a bad input"""
+        input_value = ('UnexistingExample.jpg', 100)
+        with self.assertRaises(Exception):
+           output = commonsdownloader.get_thumbnail_of_file(*input_value)
+
 if __name__ == "__main__":
     unittest.main()
