@@ -3,8 +3,9 @@
 
 """Unit tests."""
 
-from os.path import dirname, join
+from os.path import dirname, join, exists
 import unittest
+import tempfile
 import commonsdownloader
 
 
@@ -60,6 +61,43 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
         input_value = ('UnexistingExample.jpg', 100)
         with self.assertRaises(Exception):
            output = commonsdownloader.get_thumbnail_of_file(*input_value)
+
+
+class TestCommonsDownloaderOnlineFile(unittest.TestCase):
+
+    """Testing methods deadling with downloaded files"""
+
+    @classmethod
+    def setUpClass(cls):
+        """Set up the TestCase with the data files."""
+        cls.outputfile1 = join(dirname(__file__), 'data', 'Example-100.jpg')
+        cls.outputfile2 = join(dirname(__file__), 'data', 'Example-50.jpg')
+        cls.tmpdir1 = tempfile.mkdtemp()
+        cls.tmpdir2 = tempfile.mkdtemp()
+        values = [('Example.jpg', cls.tmpdir1, 100),
+                  ('Example.jpg', cls.tmpdir2, 50)]
+        cls.outputs = [commonsdownloader.download_file(*input_value)
+                        for input_value in values]
+        cls.expected = [cls.outputfile1, cls.outputfile2]
+
+    def test_paths_in_download_file(self):
+        """Test if download_file return the expected values."""
+        expected_paths = [join(self.tmpdir1, 'Example.jpeg'),
+                          join(self.tmpdir2, 'Example.jpeg')]
+        self.assertListEqual(self.outputs, expected_paths)
+
+    def test_paths_exists_in_download_file(self):
+        """Test if download_file has actually downloaded anything."""
+        for output_file in self.outputs:
+            self.assertTrue(exists(output_file))
+
+    def test_files_are_ok_in_download_file(self):
+        """Test if download_file has downloaded the right files."""
+        for (output_file, expected_file) in zip(self.outputs, self.expected):
+            output_contents = open(output_file, 'r').read()
+            expected_contents = open(expected_file, 'r').read()
+            self.assertEquals(output_contents, expected_contents)
+
 
 if __name__ == "__main__":
     unittest.main()
