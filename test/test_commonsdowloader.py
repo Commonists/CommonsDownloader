@@ -3,6 +3,7 @@
 
 """Unit tests."""
 
+from os.path import dirname, join
 import unittest
 import commonsdownloader
 
@@ -40,7 +41,10 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
 
     """Testing methods from commonsdownloader which require connection"""
 
-    pass
+    def setUp(self):
+        """Sett up the TestCase with the data files."""
+        self.outputfile1 = join(dirname(__file__), 'data', 'Example-100.jpg')
+        self.outputfile2 = join(dirname(__file__), 'data', 'Example-50.jpg')
 
 
 if __name__ == "__main__":
