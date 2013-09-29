@@ -17,7 +17,7 @@ which also allows to choose the thumbnail width.
 
 ### Using a file list ###
 
-The file list must be formated as following, with one file per line, and <filename,width>:
+The file list must be formated as following, with one file per line, and `filename,width`:
 
     Example.jpg,100
     Example ka.png,80
