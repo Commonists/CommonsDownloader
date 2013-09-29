@@ -39,6 +39,13 @@ This can be changed using the `--output` flag with a valid path.
     download_from_Wikimedia_Commons.py Example.jpg --output some/path/
 
 
+### Verbosity ###
+
+By default, the tool does not display anything it logs (through `logging`).
+
+You can increase the verbosity level with the `-v` flag:
+use `-v` to display INFO-level messages, `-vv` for DEBUG-level messages.
+
 Installation
 ------------
 
