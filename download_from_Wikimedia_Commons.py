@@ -52,6 +52,11 @@ def main():
                         action=Folder,
                         default=os.getcwd(),
                         help='The directory to download the files to')
+    parser.add_argument("-w", "--width",
+                        dest="width",
+                        type=int,
+                        default=100,
+                        help='The width of the thumbnail (default: 100)')
     parser.add_argument("-v", "--verbose",
                         action="store_true",
                         dest="verbose",
@@ -71,7 +76,7 @@ def main():
             download_file(file_name, args.output_path, width=width)
     elif args.files:
         for file_name in args.files:
-            download_file(file_name, args.output_path)
+            download_file(file_name, args.output_path, width=args.width)
     else:
         parser.print_help()
 
