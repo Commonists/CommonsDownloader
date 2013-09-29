@@ -7,13 +7,17 @@ Tool to download thumbnails of files from Wikimedia Commons
 Usage
 -----
 
-This tool can be used either by passing the filenames or by using a file list,
-which also allows to choose the thumbnail width.
+This tool can be used either by passing the filenames or by using a file list.
 
 ### Using filenames ###
 
+Just list the files we want to download.
+
     download_from_Wikimedia_Commons.py Example.jpg Example_ka.png
 
+You can set the width of the thumbnail by using the `--width` argument:
+
+    download_from_Wikimedia_Commons.py --width 50 Example.jpg Example_ka.png
 
 ### Using a file list ###
 
@@ -22,7 +26,7 @@ The file list must be formated as following, with one file per line, and `filena
     Example.jpg,100
     Example ka.png,80
 
-The use the `--list` argument:
+Then use the `--list` argument:
 
     download_from_Wikimedia_Commons.py --list list.txt
 
