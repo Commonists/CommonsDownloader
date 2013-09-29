@@ -46,6 +46,14 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
         self.outputfile1 = join(dirname(__file__), 'data', 'Example-100.jpg')
         self.outputfile2 = join(dirname(__file__), 'data', 'Example-50.jpg')
 
+    def test_get_thumbnail_of_file(self):
+        """Test get_thumbnail_of_file."""
+        values = [(('Example.jpg', 100), (self.outputfile1, 'Example.jpeg')),
+                  (('Example.jpg', 50), (self.outputfile2, 'Example.jpeg'))]
+        for (input_value, expected) in values:
+            expected_value = (open(expected[0]).read(), expected[1])
+            output = commonsdownloader.get_thumbnail_of_file(*input_value)
+            self.assertEqual(output, expected_value)
 
 if __name__ == "__main__":
     unittest.main()
