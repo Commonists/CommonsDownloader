@@ -26,6 +26,14 @@ The use the `--list` argument:
 
     download_from_Wikimedia_Commons.py --list list.txt
 
+### Setting the output folder ###
+
+By default, the tool downloads the files in the current directory.
+
+This can be changed using the `--output` flag with a valid path.
+
+    download_from_Wikimedia_Commons.py Example.jpg --output some/path/
+
 
 Installation
 ------------
