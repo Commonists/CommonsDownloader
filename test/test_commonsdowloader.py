@@ -21,6 +21,13 @@ class TestCommonsDownloader(unittest.TestCase):
             self.assertEqual(commonsdownloader.clean_up_filename(input_value),
                              expected_value)
 
+    def test_make_thumb_url(self):
+        """Test make_thumb_url."""
+        input_value = ('My_Example.jpg', 100)
+        expected_value = "http://commons.wikimedia.org/w/thumb.php?f=My_Example.jpg&width=100"
+        output = commonsdownloader.make_thumb_url(*input_value)
+        self.assertEqual(output, expected_value)
+
 
 if __name__ == "__main__":
     unittest.main()
