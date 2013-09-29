@@ -28,6 +28,13 @@ class TestCommonsDownloader(unittest.TestCase):
         output = commonsdownloader.make_thumb_url(*input_value)
         self.assertEqual(output, expected_value)
 
+    def test_make_thumbnail_name(self):
+        """Test make_thumbnail_name."""
+        input_value = ('Example.svg', 'png')
+        expected_value = "Example.png"
+        output = commonsdownloader.make_thumbnail_name(*input_value)
+        self.assertEqual(output, expected_value)
+
 
 if __name__ == "__main__":
     unittest.main()
