@@ -7,7 +7,8 @@ Tool to download thumbnails of files from Wikimedia Commons
 Usage
 -----
 
-This tool can be used either by passing the filenames or by using a file
+This tool can be used either by passing the filenames or by using a file list,
+which also allows to choose the thumbnail width.
 
 ### Using filenames ###
 
