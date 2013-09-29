@@ -7,9 +7,9 @@ import unittest
 import commonsdownloader
 
 
-class TestCommonsDownloader(unittest.TestCase):
+class TestCommonsDownloaderOffline(unittest.TestCase):
 
-    """Testing methods from commonsdownloader."""
+    """Testing methods from commonsdownloader which do not require connection."""
 
     def test_clean_up_filename(self):
         """Test clean_up_filename."""
@@ -34,6 +34,13 @@ class TestCommonsDownloader(unittest.TestCase):
         expected_value = "Example.png"
         output = commonsdownloader.make_thumbnail_name(*input_value)
         self.assertEqual(output, expected_value)
+
+
+class TestCommonsDownloaderOnline(unittest.TestCase):
+
+    """Testing methods from commonsdownloader which require connection"""
+
+    pass
 
 
 if __name__ == "__main__":
