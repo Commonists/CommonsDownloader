@@ -24,9 +24,13 @@ classifiers = [
     'Programming Language :: Python',
     'Topic :: Utilities'
 ]
-py_modules = ['commonsdownloader']
-scripts = ['download_from_Wikimedia_Commons.py']
+packages = ['commonsdownloader']
 requires = ['argparse']
+entry_points = {
+        'console_scripts': [
+            'download_from_Wikimedia_Commons = commonsdownloader.commonsdownloader:main',
+            ]
+        }
 
 setup(
       name='CommonsDownloader',
@@ -37,8 +41,8 @@ setup(
       description='Download thumbnails from Wikimedia Commons',
       long_description=open('README.md').read(),
       license='MIT',
-      py_modules=py_modules,
-      scripts=scripts,
+      packages=packages,
+      entry_points=entry_points,
       install_requires=requires,
       classifiers=classifiers
 )
