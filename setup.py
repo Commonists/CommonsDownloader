@@ -8,6 +8,12 @@ try:
 except ImportError:
     from distutils.core import setup
 
+try:
+    import commonsdownloader
+    version = commonsdownloader.__version__
+except ImportError:
+    version = 'Undefined'
+
 
 classifiers = [
     'Development Status :: 4 - Beta',
@@ -24,7 +30,7 @@ requires = ['argparse']
 
 setup(
       name='CommonsDownloader',
-      version=0.1,
+      version=version,
       author='Jean-Frédéric',
       author_email='JeanFred@github',
       url='http://github.com.org/JeanFred/CommonsDownloader',
