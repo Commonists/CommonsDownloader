@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # -=- encoding: latin-1 -=-
 
-"""Download files from Wikimedia Commons"""
+"""Download files from Wikimedia Commons."""
 
 import os
 import logging
 import argparse
-from commonsdownloader import download_file
+from thumbnaildownload import download_file
 
 
 def get_file_names_from_textfile(textfile_handler):
