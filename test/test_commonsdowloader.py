@@ -6,12 +6,12 @@
 from os.path import dirname, join, exists
 import unittest
 import tempfile
-import commonsdownloader
+from commonsdownloader import thumbnaildownload
 
 
 class TestCommonsDownloaderOffline(unittest.TestCase):
 
-    """Testing methods from commonsdownloader which do not require connection."""
+    """Testing methods from thumbnaildownload which do not require connection."""
 
     def test_clean_up_filename(self):
         """Test clean_up_filename."""
@@ -20,27 +20,27 @@ class TestCommonsDownloaderOffline(unittest.TestCase):
                   (' Example.jpg', 'Example.jpg'),
                   ('My Example.jpg', 'My_Example.jpg')]
         for (input_value, expected_value) in values:
-            self.assertEqual(commonsdownloader.clean_up_filename(input_value),
+            self.assertEqual(thumbnaildownload.clean_up_filename(input_value),
                              expected_value)
 
     def test_make_thumb_url(self):
         """Test make_thumb_url."""
         input_value = ('My_Example.jpg', 100)
         expected_value = "http://commons.wikimedia.org/w/thumb.php?f=My_Example.jpg&width=100"
-        output = commonsdownloader.make_thumb_url(*input_value)
+        output = thumbnaildownload.make_thumb_url(*input_value)
         self.assertEqual(output, expected_value)
 
     def test_make_thumbnail_name(self):
         """Test make_thumbnail_name."""
         input_value = ('Example.svg', 'png')
         expected_value = "Example.png"
-        output = commonsdownloader.make_thumbnail_name(*input_value)
+        output = thumbnaildownload.make_thumbnail_name(*input_value)
         self.assertEqual(output, expected_value)
 
 
 class TestCommonsDownloaderOnline(unittest.TestCase):
 
-    """Testing methods from commonsdownloader which require connection"""
+    """Testing methods from thumbnaildownload which require connection"""
 
     def setUp(self):
         """Sett up the TestCase with the data files."""
@@ -53,14 +53,14 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
                   (('Example.jpg', 50), (self.outputfile2, 'Example.jpeg'))]
         for (input_value, expected) in values:
             expected_value = (open(expected[0]).read(), expected[1])
-            output = commonsdownloader.get_thumbnail_of_file(*input_value)
+            output = thumbnaildownload.get_thumbnail_of_file(*input_value)
             self.assertEqual(output, expected_value)
 
     def test_get_thumbnail_of_file_error(self):
         """Test get_thumbnail_of_file with a bad input"""
         input_value = ('UnexistingExample.jpg', 100)
         with self.assertRaises(Exception):
-           output = commonsdownloader.get_thumbnail_of_file(*input_value)
+           output = thumbnaildownload.get_thumbnail_of_file(*input_value)
 
 
 class TestCommonsDownloaderOnlineFile(unittest.TestCase):
@@ -76,7 +76,7 @@ class TestCommonsDownloaderOnlineFile(unittest.TestCase):
         cls.tmpdir2 = tempfile.mkdtemp()
         values = [('Example.jpg', cls.tmpdir1, 100),
                   ('Example.jpg', cls.tmpdir2, 50)]
-        cls.outputs = [commonsdownloader.download_file(*input_value)
+        cls.outputs = [thumbnaildownload.download_file(*input_value)
                         for input_value in values]
         cls.expected = [cls.outputfile1, cls.outputfile2]
 
