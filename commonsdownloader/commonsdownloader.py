@@ -21,6 +21,18 @@ def get_file_names_from_textfile(textfile_handler):
         yield (image_name, width)
 
 
+def download_with_file_list(file_list, output_path):
+    """Download files from a given textfile list."""
+    for (file_name, width) in get_file_names_from_textfile(args.file_list):
+        download_file(file_name, args.output_path, width=width)
+
+
+def download_from_files(files, output_path, width):
+    """Download files from a given file list."""
+    for file_name in files:
+        download_file(file_name, output_path, width=width)
+
+
 class Folder(argparse.Action):
 
     """An argparse action for directories."""
@@ -70,11 +82,9 @@ def main():
     logging.info("Starting")
 
     if args.file_list:
-        for (file_name, width) in get_file_names_from_textfile(args.file_list):
-            download_file(file_name, args.output_path, width=width)
+        download_from_file_list(args.file_list, args.output_path)
     elif args.files:
-        for file_name in args.files:
-            download_file(file_name, args.output_path, width=args.width)
+        download_from_files(args.files, args.output_path, args.width)
     else:
         parser.print_help()
 
