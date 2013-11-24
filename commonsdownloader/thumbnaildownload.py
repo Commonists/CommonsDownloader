@@ -21,6 +21,12 @@ def make_thumb_url(image_name, width):
     return base_url % (image_name, width)
 
 
+def clean_extension(extension):
+    """Return a cleaned-up extension - only applies for JPEG."""
+    extension_converter = {'jpeg': 'jpg'}
+    return extension_converter.get(extension, extension)
+
+
 def make_thumbnail_name(image_name, extension):
     """Return name of the downloaded thumbnail, based on the extension."""
     file_name, _ = os.path.splitext(image_name)

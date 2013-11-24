@@ -30,6 +30,15 @@ class TestCommonsDownloaderOffline(unittest.TestCase):
         output = thumbnaildownload.make_thumb_url(*input_value)
         self.assertEqual(output, expected_value)
 
+    def test_clean_extension(self):
+        """Test clean_extension."""
+        values = [('jpg', 'jpg'),
+                  ('png', 'png'),
+                  ('jpeg', 'jpg')]
+        for (input_value, expected_value) in values:
+            self.assertEqual(thumbnaildownload.clean_extension(input_value),
+                             expected_value)
+
     def test_make_thumbnail_name(self):
         """Test make_thumbnail_name."""
         input_value = ('Example.svg', 'png')
