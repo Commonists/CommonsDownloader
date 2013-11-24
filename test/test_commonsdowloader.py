@@ -58,8 +58,8 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
 
     def test_get_thumbnail_of_file(self):
         """Test get_thumbnail_of_file."""
-        values = [(('Example.jpg', 100), (self.outputfile1, 'Example.jpeg')),
-                  (('Example.jpg', 50), (self.outputfile2, 'Example.jpeg'))]
+        values = [(('Example.jpg', 100), (self.outputfile1, 'Example.jpg')),
+                  (('Example.jpg', 50), (self.outputfile2, 'Example.jpg'))]
         for (input_value, expected) in values:
             expected_value = (open(expected[0]).read(), expected[1])
             output = thumbnaildownload.get_thumbnail_of_file(*input_value)
@@ -91,8 +91,8 @@ class TestCommonsDownloaderOnlineFile(unittest.TestCase):
 
     def test_paths_in_download_file(self):
         """Test if download_file return the expected values."""
-        expected_paths = [join(self.tmpdir1, 'Example.jpeg'),
-                          join(self.tmpdir2, 'Example.jpeg')]
+        expected_paths = [join(self.tmpdir1, 'Example.jpg'),
+                          join(self.tmpdir2, 'Example.jpg')]
         self.assertListEqual(self.outputs, expected_paths)
 
     def test_paths_exists_in_download_file(self):

@@ -30,7 +30,7 @@ def clean_extension(extension):
 def make_thumbnail_name(image_name, extension):
     """Return name of the downloaded thumbnail, based on the extension."""
     file_name, _ = os.path.splitext(image_name)
-    return file_name + '.' + extension
+    return file_name + '.' + clean_extension(extension)
 
 
 def get_thumbnail_of_file(image_name, width):
