@@ -21,7 +21,7 @@ def get_file_names_from_textfile(textfile_handler):
         yield (image_name, width)
 
 
-def download_with_file_list(file_list, output_path):
+def download_from_file_list(file_list, output_path):
     """Download files from a given textfile list."""
     for (file_name, width) in get_file_names_from_textfile(file_list):
         download_file(file_name, output_path, width=width)
