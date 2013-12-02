@@ -62,7 +62,7 @@ This will install the executable script `download_from_Wikimedia_Commons.py`
 
 Build status
 ------------
-[![Build Status](https://secure.travis-ci.org/JeanFred/CommonsDownloader.png)](http://travis-ci.org/JeanFred/CommonsDownloader)
+[![Build Status](https://secure.travis-ci.org/Commonists/CommonsDownloader.png)](http://travis-ci.org/Commonists/CommonsDownloader)
 
 
 License
