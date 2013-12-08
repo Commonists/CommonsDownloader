@@ -65,11 +65,17 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
             output = thumbnaildownload.get_thumbnail_of_file(*input_value)
             self.assertEqual(output, expected_value)
 
-    def test_get_thumbnail_of_file_error(self):
-        """Test get_thumbnail_of_file with a bad input"""
+    def test_get_thumbnail_of_file_higher_than_possible(self):
+        """Test get_thumbnail_of_file with a size larger than available."""
+        input_value = ('Example.jpg', 1000)
+        with self.assertRaises(thumbnaildownload.RequestedWidthBiggerThanSourceException):
+            _ = thumbnaildownload.get_thumbnail_of_file(*input_value)
+
+    def test_get_thumbnail_of_non_existing_file(self):
+        """Test get_thumbnail_of_file with a non-existing file"""
         input_value = ('UnexistingExample.jpg', 100)
-        with self.assertRaises(Exception):
-           output = thumbnaildownload.get_thumbnail_of_file(*input_value)
+        with self.assertRaises(thumbnaildownload.FileDoesNotExistException):
+            _ = thumbnaildownload.get_thumbnail_of_file(*input_value)
 
 
 class TestCommonsDownloaderOnlineFile(unittest.TestCase):

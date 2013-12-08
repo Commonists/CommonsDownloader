@@ -3,11 +3,33 @@
 """Download files from Wikimedia Commons"""
 
 import os
+import re
 import urllib2
 import logging
 
 
 DEFAULT_WIDTH = 100
+
+
+class DownloadException(Exception):
+
+    """Base class for exceptions in this module."""
+
+    pass
+
+
+class FileDoesNotExistException(DownloadException):
+
+    """Exception raised when a requested file does not exist."""
+
+    pass
+
+
+class RequestedWidthBiggerThanSourceException(DownloadException):
+
+    """Exception raised when the requested width is bigger than source file."""
+
+    pass
 
 
 def clean_up_filename(file_name):
@@ -44,7 +66,22 @@ def get_thumbnail_of_file(image_name, width):
         extension = opened.headers.subtype
         return opened.read(), make_thumbnail_name(image_name, extension)
     except urllib2.HTTPError, e:
-        raise Exception(e.fp.read())
+        message = e.fp.read()
+        raise get_exception_based_on_api_message(message, image_name)
+
+
+def get_exception_based_on_api_message(message, image_name=""):
+    """Return the exception matching the given API error message."""
+    msg_bigger_than_source = re.compile('Image was not scaled, is the requested width bigger than the source?')
+    msg_does_not_exist = re.compile('The source file .* does not exist')
+    if re.search(msg_bigger_than_source, message):
+        msg = "File %s requested at a width bigger than source" % image_name
+        return RequestedWidthBiggerThanSourceException(msg)
+    elif re.search(msg_does_not_exist, message):
+        msg = "File %s does not exist" % image_name
+        return FileDoesNotExistException(msg)
+    else:
+        return DownloadException(message)
 
 
 def download_file(image_name, output_path, width=DEFAULT_WIDTH):
