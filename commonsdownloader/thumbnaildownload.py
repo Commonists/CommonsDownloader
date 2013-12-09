@@ -43,6 +43,12 @@ def make_thumb_url(image_name, width):
     return base_url % (image_name, width)
 
 
+def make_full_size_url(image_name):
+    """Return the URL to the full size of the file."""
+    base_url = "http://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=%s"
+    return base_url % (image_name)
+
+
 def clean_extension(extension):
     """Return a cleaned-up extension - only applies for JPEG."""
     extension_converter = {'jpeg': 'jpg'}

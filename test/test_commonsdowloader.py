@@ -30,6 +30,12 @@ class TestCommonsDownloaderOffline(unittest.TestCase):
         output = thumbnaildownload.make_thumb_url(*input_value)
         self.assertEqual(output, expected_value)
 
+    def test_make_full_size_url(self):
+        input_value = 'My_Example.jpg'
+        expected_value = "http://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=My_Example.jpg"
+        output = thumbnaildownload.make_full_size_url(input_value)
+        self.assertEqual(output, expected_value)
+
     def test_clean_extension(self):
         """Test clean_extension."""
         values = [('jpg', 'jpg'),
