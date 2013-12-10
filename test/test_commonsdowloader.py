@@ -91,6 +91,12 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
         output = thumbnaildownload.get_full_size_file(input_value)
         self.assertEqual(output, expected_value)
 
+    def test_get_full_size_of_non_existing_file(self):
+        """Test get_full_size_file with a non-existing file."""
+        input_value = 'UnexistingExample.jpg'
+        with self.assertRaises(thumbnaildownload.FileDoesNotExistException):
+            _ = thumbnaildownload.get_full_size_file(input_value)
+
 
 class TestCommonsDownloaderOnlineFile(unittest.TestCase):
 
