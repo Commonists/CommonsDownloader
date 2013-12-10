@@ -133,6 +133,18 @@ class TestCommonsDownloaderOnlineFile(unittest.TestCase):
             expected_contents = open(expected_file, 'r').read()
             self.assertEquals(output_contents, expected_contents)
 
+    def test_download_file_with_size_higher_than_possible(self):
+        """Test download_file with a size larger than available."""
+        input_value = ('Example.jpg', 1000)
+        with self.assertRaises(thumbnaildownload.RequestedWidthBiggerThanSourceException):
+            _ = thumbnaildownload.download_file(input_value[0], self.tmpdir1, width=input_value[1])
+
+    def test_download_file_with_non_existing_file(self):
+        """Test download_file with a non-existing file."""
+        input_value = ('UnexistingExample.jpg', 100)
+        with self.assertRaises(thumbnaildownload.FileDoesNotExistException):
+            _ = thumbnaildownload.download_file(input_value[0], self.tmpdir1, width=input_value[1])
+
 
 if __name__ == "__main__":
     unittest.main()
