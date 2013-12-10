@@ -108,18 +108,22 @@ class TestCommonsDownloaderOnlineFile(unittest.TestCase):
         """Set up the TestCase with the data files."""
         cls.outputfile1 = join(dirname(__file__), 'data', 'Example-100.jpg')
         cls.outputfile2 = join(dirname(__file__), 'data', 'Example-50.jpg')
+        cls.outputfile3 = join(dirname(__file__), 'data', 'Example.jpg')
         cls.tmpdir1 = tempfile.mkdtemp()
         cls.tmpdir2 = tempfile.mkdtemp()
+        cls.tmpdir3 = tempfile.mkdtemp()
         values = [('Example.jpg', cls.tmpdir1, 100),
-                  ('Example.jpg', cls.tmpdir2, 50)]
+                  ('Example.jpg', cls.tmpdir2, 50),
+                  ('Example.jpg', cls.tmpdir3, 1000)]
         cls.outputs = [thumbnaildownload.download_file(*input_value)
                        for input_value in values]
-        cls.expected = [cls.outputfile1, cls.outputfile2]
+        cls.expected = [cls.outputfile1, cls.outputfile2, cls.outputfile3]
 
     def test_paths_in_download_file(self):
         """Test if download_file return the expected values."""
         expected_paths = [join(self.tmpdir1, 'Example.jpg'),
-                          join(self.tmpdir2, 'Example.jpg')]
+                          join(self.tmpdir2, 'Example.jpg'),
+                          join(self.tmpdir3, 'Example.jpg')]
         self.assertListEqual(self.outputs, expected_paths)
 
     def test_paths_exists_in_download_file(self):
@@ -133,12 +137,6 @@ class TestCommonsDownloaderOnlineFile(unittest.TestCase):
             output_contents = open(output_file, 'r').read()
             expected_contents = open(expected_file, 'r').read()
             self.assertEquals(output_contents, expected_contents)
-
-    def test_download_file_with_size_higher_than_possible(self):
-        """Test download_file with a size larger than available."""
-        input_value = ('Example.jpg', 1000)
-        with self.assertRaises(thumbnaildownload.RequestedWidthBiggerThanSourceException):
-            _ = thumbnaildownload.download_file(input_value[0], self.tmpdir1, width=input_value[1])
 
     def test_download_file_with_non_existing_file(self):
         """Test download_file with a non-existing file."""

@@ -113,7 +113,11 @@ def download_file(image_name, output_path, width=DEFAULT_WIDTH):
     """Download a given Wikimedia Commons file."""
     image_name = clean_up_filename(image_name)
     logging.info("Downloading %s with width %s", image_name, width)
-    contents, output_file_name = get_thumbnail_of_file(image_name, width)
+    try:
+        contents, output_file_name = get_thumbnail_of_file(image_name, width)
+    except RequestedWidthBiggerThanSourceException:
+        logging.info("Requested width is bigger than source - downloading full size")
+        contents, output_file_name = get_full_size_file(image_name)
     output_file_path = os.path.join(output_path, output_file_name)
     with open(output_file_path, 'wb') as f:
         logging.debug("Writing as %s" % output_file_path)
