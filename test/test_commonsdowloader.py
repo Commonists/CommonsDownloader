@@ -31,6 +31,7 @@ class TestCommonsDownloaderOffline(unittest.TestCase):
         self.assertEqual(output, expected_value)
 
     def test_make_full_size_url(self):
+        """Test make_full_size_url."""
         input_value = 'My_Example.jpg'
         expected_value = "http://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=My_Example.jpg"
         output = thumbnaildownload.make_full_size_url(input_value)
@@ -55,7 +56,7 @@ class TestCommonsDownloaderOffline(unittest.TestCase):
 
 class TestCommonsDownloaderOnline(unittest.TestCase):
 
-    """Testing methods from thumbnaildownload which require connection"""
+    """Testing methods from thumbnaildownload which require connection."""
 
     def setUp(self):
         """Sett up the TestCase with the data files."""
@@ -79,7 +80,7 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
             _ = thumbnaildownload.get_thumbnail_of_file(*input_value)
 
     def test_get_thumbnail_of_non_existing_file(self):
-        """Test get_thumbnail_of_file with a non-existing file"""
+        """Test get_thumbnail_of_file with a non-existing file."""
         input_value = ('UnexistingExample.jpg', 100)
         with self.assertRaises(thumbnaildownload.FileDoesNotExistException):
             _ = thumbnaildownload.get_thumbnail_of_file(*input_value)
@@ -100,7 +101,7 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
 
 class TestCommonsDownloaderOnlineFile(unittest.TestCase):
 
-    """Testing methods deadling with downloaded files"""
+    """Testing methods dealing with downloaded files."""
 
     @classmethod
     def setUpClass(cls):
@@ -112,7 +113,7 @@ class TestCommonsDownloaderOnlineFile(unittest.TestCase):
         values = [('Example.jpg', cls.tmpdir1, 100),
                   ('Example.jpg', cls.tmpdir2, 50)]
         cls.outputs = [thumbnaildownload.download_file(*input_value)
-                        for input_value in values]
+                       for input_value in values]
         cls.expected = [cls.outputfile1, cls.outputfile2]
 
     def test_paths_in_download_file(self):
