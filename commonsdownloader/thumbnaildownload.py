@@ -76,6 +76,21 @@ def get_thumbnail_of_file(image_name, width):
         raise get_exception_based_on_api_message(message, image_name)
 
 
+def get_full_size_file(image_name):
+    """Return the file contents of given file at full size."""
+    hdr = {'User-Agent': 'Python urllib2'}
+    url = make_full_size_url(image_name)
+    req = urllib2.Request(url, headers=hdr)
+    try:
+        logging.debug("Retrieving %s" % url)
+        opened = urllib2.urlopen(req)
+        extension = opened.headers.subtype
+        return opened.read(), make_thumbnail_name(image_name, extension)
+    except urllib2.HTTPError, e:
+        message = e.fp.read()
+        raise get_exception_based_on_api_message(message, image_name)
+
+
 def get_exception_based_on_api_message(message, image_name=""):
     """Return the exception matching the given API error message."""
     msg_bigger_than_source = re.compile('Image was not scaled, is the requested width bigger than the source?')

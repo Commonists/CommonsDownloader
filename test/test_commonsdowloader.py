@@ -61,6 +61,7 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
         """Sett up the TestCase with the data files."""
         self.outputfile1 = join(dirname(__file__), 'data', 'Example-100.jpg')
         self.outputfile2 = join(dirname(__file__), 'data', 'Example-50.jpg')
+        self.outputfile3 = join(dirname(__file__), 'data', 'Example.jpg')
 
     def test_get_thumbnail_of_file(self):
         """Test get_thumbnail_of_file."""
@@ -82,6 +83,13 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
         input_value = ('UnexistingExample.jpg', 100)
         with self.assertRaises(thumbnaildownload.FileDoesNotExistException):
             _ = thumbnaildownload.get_thumbnail_of_file(*input_value)
+
+    def test_get_full_size_file(self):
+        """Test get_full_size_file."""
+        input_value = 'Example.jpg'
+        expected_value = (open(self.outputfile3).read(), 'Example.jpg')
+        output = thumbnaildownload.get_full_size_file(input_value)
+        self.assertEqual(output, expected_value)
 
 
 class TestCommonsDownloaderOnlineFile(unittest.TestCase):
