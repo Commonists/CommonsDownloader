@@ -2,6 +2,7 @@ CommonsDownloader
 =================
 [![Build Status](https://secure.travis-ci.org/Commonists/CommonsDownloader.png)](http://travis-ci.org/Commonists/CommonsDownloader)
 [![Coverage Status](https://coveralls.io/repos/Commonists/CommonsDownloader/badge.png?branch=master)](https://coveralls.io/r/Commonists/CommonsDownloader?branch=master)
+[![License](http://img.shields.io/badge/license-MIT-orange.svg)](http://opensource.org/licenses/MIT)
 
 Tool to download thumbnails of files from Wikimedia Commons 
 
@@ -60,8 +61,3 @@ Alternatively, you can clone the repository and install it using `setuptools`:
     python setup.py install
 
 This will install the executable script `download_from_Wikimedia_Commons.py`
-
-
-License
--------
-MIT license
