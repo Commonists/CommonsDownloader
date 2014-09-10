@@ -1,6 +1,7 @@
 CommonsDownloader
 =================
 [![Build Status](https://secure.travis-ci.org/Commonists/CommonsDownloader.png)](http://travis-ci.org/Commonists/CommonsDownloader)
+[![Coverage Status](https://coveralls.io/repos/Commonists/CommonsDownloader/badge.png?branch=master)](https://coveralls.io/r/Commonists/CommonsDownloader?branch=master)
 
 Tool to download thumbnails of files from Wikimedia Commons 
 
