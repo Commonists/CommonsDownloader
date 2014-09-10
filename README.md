@@ -1,5 +1,6 @@
 CommonsDownloader
 =================
+[![Build Status](https://secure.travis-ci.org/Commonists/CommonsDownloader.png)](http://travis-ci.org/Commonists/CommonsDownloader)
 
 Tool to download thumbnails of files from Wikimedia Commons 
 
@@ -58,11 +59,6 @@ Alternatively, you can clone the repository and install it using `setuptools`:
     python setup.py install
 
 This will install the executable script `download_from_Wikimedia_Commons.py`
-
-
-Build status
-------------
-[![Build Status](https://secure.travis-ci.org/Commonists/CommonsDownloader.png)](http://travis-ci.org/Commonists/CommonsDownloader)
 
 
 License
