@@ -1,3 +1,5 @@
 -r requirements.txt
 
 nose
+nose-cov
+coverage
