@@ -14,7 +14,7 @@ def get_file_names_from_textfile(textfile_handler):
     for line in textfile_handler:
         line = line.rstrip()
         try:
-            (image_name, width) = line.split(',')
+            (image_name, width) = line.rsplit(',', 1)
         except ValueError:
             image_name = line
             width = None
