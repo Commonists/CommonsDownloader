@@ -30,6 +30,13 @@ class TestCommonsDownloaderOffline(unittest.TestCase):
         output = thumbnaildownload.make_thumb_url(*input_value)
         self.assertEqual(output, expected_value)
 
+    def test_make_thumb_url_with_ampersand(self):
+        """Test make_thumb_url with an ampersand character."""
+        input_value = ('My_Example2&3.jpg', 100)
+        expected_value = "http://commons.wikimedia.org/w/thumb.php?f=My_Example2%263.jpg&width=100"
+        output = thumbnaildownload.make_thumb_url(*input_value)
+        self.assertEqual(output, expected_value)
+
     def test_make_full_size_url(self):
         """Test make_full_size_url."""
         input_value = 'My_Example.jpg'
