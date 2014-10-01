@@ -40,7 +40,7 @@ def clean_up_filename(file_name):
 def make_thumb_url(image_name, width):
     """Return the URL to the thumbnail of the file, at the given width."""
     base_url = "http://commons.wikimedia.org/w/thumb.php?f=%s&width=%s"
-    return base_url % (image_name, width)
+    return base_url % (urllib2.quote(image_name), width)
 
 
 def make_full_size_url(image_name):
