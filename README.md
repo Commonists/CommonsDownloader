@@ -46,10 +46,10 @@ This can be changed using the `--output` flag with a valid path.
 
 ### Verbosity ###
 
-By default, the tool does not display anything it logs (through `logging`).
+By default, the tool display basic information its logs (through `logging`).
 
-You can increase the verbosity level with the `-v` flag:
-use `-v` to display INFO-level messages, `-vv` for DEBUG-level messages.
+You can adjust the verbosity level with the `-v` and `-q` flags:
+use `-v` to display DEBUG-level messages, `-q` to silence INFO-level messages.
 
 Installation
 ------------
