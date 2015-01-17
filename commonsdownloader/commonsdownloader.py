@@ -65,6 +65,7 @@ def is_file_in_cache(file_name, width, cache):
 def write_file_to_cache(file_name, width, cache_fh):
     """Write the given file on cache."""
     cache_fh.write("%s,%s\n" % (file_name, str(width)))
+    logging.debug("Wrote file %s to cache" % file_name)
 
 
 def download_files_if_not_in_cache(files_iterator, output_path):
@@ -115,16 +116,23 @@ def main():
                         type=int,
                         default=100,
                         help='The width of the thumbnail (default: 100)')
-    parser.add_argument("-v",
-                        action="count",
-                        dest="verbose",
-                        default=0,
-                        help="Verbosity level. -v for INFO, -vv for DEBUG")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-v",
+                       action="count",
+                       dest="verbose",
+                       default=1,
+                       help="Verbosity level. -v for DEBUG")
+    group.add_argument("-q", "--quiet",
+                       action="store_const",
+                       dest="verbose",
+                       const=0,
+                       help="To silence the INFO messages")
     args = parser.parse_args()
     logging_map = {0: logging.WARNING,
                    1: logging.INFO,
                    2: logging.DEBUG}
-    logging.basicConfig(level=logging_map[args.verbose])
+    logging_level = logging_map.get(args.verbose, logging.DEBUG)
+    logging.basicConfig(level=logging_level)
     logging.info("Starting")
 
     if args.file_list:
