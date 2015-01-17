@@ -6,7 +6,7 @@
 import os
 import logging
 import argparse
-from thumbnaildownload import download_file
+from thumbnaildownload import download_file, DownloadException
 from itertools import izip_longest
 
 
@@ -76,8 +76,11 @@ def download_files_if_not_in_cache(files_iterator, output_path):
             if is_file_in_cache(file_name, width, local_cache):
                 logging.info('Skipping file %s' % file_name)
                 continue
-            download_file(file_name, output_path, width=width)
-            write_file_to_cache(file_name, width, cache_fh)
+            try:
+                download_file(file_name, output_path, width=width)
+                write_file_to_cache(file_name, width, cache_fh)
+            except DownloadException, e:
+                logging.error("Could not download %s: %s", file_name, e.message)
 
 
 class Folder(argparse.Action):

@@ -119,7 +119,13 @@ def download_file(image_name, output_path, width=DEFAULT_WIDTH):
         logging.info("Requested width is bigger than source - downloading full size")
         contents, output_file_name = get_full_size_file(image_name)
     output_file_path = os.path.join(output_path, output_file_name)
-    with open(output_file_path, 'wb') as f:
-        logging.debug("Writing as %s" % output_file_path)
-        f.write(contents)
-    return output_file_path
+    try:
+        with open(output_file_path, 'wb') as f:
+            logging.debug("Writing as %s" % output_file_path)
+            f.write(contents)
+        return output_file_path
+    except Exception, e:
+        logging.critical(e.message)
+        msg = 'An unexpected error occured when downloading %s to %s: %s' % \
+              (image_name, output_path, e.message)
+        raise DownloadException(msg)
