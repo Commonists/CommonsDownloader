@@ -51,7 +51,7 @@ def read_local_cache(output_path):
     try:
         with open(local_cache_path, 'r') as f:
             cache = dict(get_files_from_textfile(f))
-            logging.debug('Retrieving %s elements from cache' % len(cache))
+            logging.debug('Retrieving %s elements from cache', len(cache))
             return cache
     except IOError, e:
         return {}
@@ -65,7 +65,7 @@ def is_file_in_cache(file_name, width, cache):
 def write_file_to_cache(file_name, width, cache_fh):
     """Write the given file on cache."""
     cache_fh.write("%s,%s\n" % (file_name, str(width)))
-    logging.debug("Wrote file %s to cache" % file_name)
+    logging.debug("Wrote file %s to cache", file_name)
 
 
 def download_files_if_not_in_cache(files_iterator, output_path):
@@ -74,7 +74,7 @@ def download_files_if_not_in_cache(files_iterator, output_path):
     with open(get_local_cache_path(output_path), 'a') as cache_fh:
         for (file_name, width) in files_iterator:
             if is_file_in_cache(file_name, width, local_cache):
-                logging.info('Skipping file %s' % file_name)
+                logging.info('Skipping file %s', file_name)
                 continue
             try:
                 download_file(file_name, output_path, width=width)
