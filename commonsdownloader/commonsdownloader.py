@@ -7,14 +7,16 @@ import os
 import logging
 import argparse
 from thumbnaildownload import download_file
+from itertools import izip_longest
 
 
-def get_file_names_from_textfile(textfile_handler):
+def get_files_from_textfile(textfile_handler):
     """Yield the file names and widths by parsing a given text fileahandler."""
     for line in textfile_handler:
         line = line.rstrip()
         try:
             (image_name, width) = line.rsplit(',', 1)
+            width = int(width)
         except ValueError:
             image_name = line
             width = None
@@ -23,13 +25,24 @@ def get_file_names_from_textfile(textfile_handler):
 
 def download_from_file_list(file_list, output_path):
     """Download files from a given textfile list."""
-    for (file_name, width) in get_file_names_from_textfile(file_list):
-        download_file(file_name, output_path, width=width)
+    files_to_download = get_files_from_textfile(file_list)
+    download_files(files_to_download, output_path)
+
+
+def get_files_from_arguments(files, width):
+    """Yield the file names and chosen width."""
+    return izip_longest(files, [], fillvalue=width)
 
 
 def download_from_files(files, output_path, width):
     """Download files from a given file list."""
-    for file_name in files:
+    files_to_download = get_files_from_arguments(files, width)
+    download_files(files_to_download, output_path)
+
+
+def download_files(files_iterator, output_path):
+    """Download the given files to the given path."""
+    for (file_name, width) in files_iterator:
         download_file(file_name, output_path, width=width)
 
 
