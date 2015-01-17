@@ -32,6 +32,13 @@ class RequestedWidthBiggerThanSourceException(DownloadException):
     pass
 
 
+class CouldNotWriteFileOnDiskException(DownloadException):
+
+    """Exception raised when the file could not be written on disk."""
+
+    pass
+
+
 def clean_up_filename(file_name):
     """Return the cleaned-up file title."""
     return file_name.strip().replace(' ', '_')
@@ -124,6 +131,11 @@ def download_file(image_name, output_path, width=DEFAULT_WIDTH):
             logging.debug("Writing as %s" % output_file_path)
             f.write(contents)
         return output_file_path
+    except IOError, e:
+        msg = 'Could not write file %s on disk to %s: %s' % \
+              (image_name, output_path, e.message)
+        logging.error(msg)
+        raise CouldNotWriteFileOnDiskException(msg)
     except Exception, e:
         logging.critical(e.message)
         msg = 'An unexpected error occured when downloading %s to %s: %s' % \
