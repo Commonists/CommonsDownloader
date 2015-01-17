@@ -1,7 +1,7 @@
 CommonsDownloader
 =================
-[![Build Status](https://secure.travis-ci.org/Commonists/CommonsDownloader.png)](http://travis-ci.org/Commonists/CommonsDownloader)
-[![Coverage Status](https://coveralls.io/repos/Commonists/CommonsDownloader/badge.png?branch=master)](https://coveralls.io/r/Commonists/CommonsDownloader?branch=master)
+[![Build Status](https://travis-ci.org/Commonists/CommonsDownloader.svg?branch=master)](https://travis-ci.org/Commonists/CommonsDownloader)
+[![Coverage Status](https://coveralls.io/repos/Commonists/CommonsDownloader/badge.svg?branch=master)](https://coveralls.io/r/Commonists/CommonsDownloader?branch=master)
 [![Code Health](https://landscape.io/github/Commonists/CommonsDownloader/master/landscape.svg)](https://landscape.io/github/Commonists/CommonsDownloader/master)
 [![Documentation Status](https://readthedocs.org/projects/commonsdownloader/badge/?version=latest)](https://readthedocs.org/projects/commonsdownloader/?badge=latest)
 [![License](http://img.shields.io/badge/license-MIT-orange.svg)](http://opensource.org/licenses/MIT)
