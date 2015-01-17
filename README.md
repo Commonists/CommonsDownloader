@@ -56,7 +56,7 @@ Installation
 
 Easiest way to install is to use `pip`:
 
-    pip install git+git://github.com/JeanFred/CommonsDownloader.git#egg=CommonsDownloader
+    pip install git+git://github.com/Commonists/CommonsDownloader.git#egg=CommonsDownloader
 
 Alternatively, you can clone the repository and install it using `setuptools`:
 

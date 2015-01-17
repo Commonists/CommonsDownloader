@@ -37,7 +37,7 @@ setup(
       version=version,
       author='Jean-Frédéric',
       author_email='JeanFred@github',
-      url='http://github.com.org/JeanFred/CommonsDownloader',
+      url='http://github.com.org/Commonists/CommonsDownloader',
       description='Download thumbnails from Wikimedia Commons',
       long_description=open('README.md').read(),
       license='MIT',
