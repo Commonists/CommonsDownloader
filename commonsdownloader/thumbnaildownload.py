@@ -1,6 +1,6 @@
 # -=- encoding: latin-1 -=-
 
-"""Download files from Wikimedia Commons"""
+"""Download files from Wikimedia Commons."""
 
 import os
 import re

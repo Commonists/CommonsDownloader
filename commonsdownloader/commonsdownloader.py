@@ -11,7 +11,7 @@ from itertools import izip_longest
 
 
 def get_files_from_textfile(textfile_handler):
-    """Yield the file names and widths by parsing a given text fileahandler."""
+    """Yield the file names and widths by parsing a text file handler."""
     for line in textfile_handler:
         line = line.rstrip()
         try:
@@ -88,6 +88,7 @@ class Folder(argparse.Action):
     """An argparse action for directories."""
 
     def __call__(self, parser, namespace, values, option_string=None):
+        """Overriding call action."""
         prospective_dir = values
         if not os.path.isdir(prospective_dir):
             msg = "Folder:{0} is not a valid path".format(prospective_dir)

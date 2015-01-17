@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
 
-"""Setup script"""
+"""Setup script."""
 
 try:
     from setuptools import setup
