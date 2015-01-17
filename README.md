@@ -2,7 +2,9 @@ CommonsDownloader
 =================
 [![Build Status](https://secure.travis-ci.org/Commonists/CommonsDownloader.png)](http://travis-ci.org/Commonists/CommonsDownloader)
 [![Coverage Status](https://coveralls.io/repos/Commonists/CommonsDownloader/badge.png?branch=master)](https://coveralls.io/r/Commonists/CommonsDownloader?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/commonsdownloader/badge/?version=latest)](https://readthedocs.org/projects/commonsdownloader/?badge=latest)
 [![License](http://img.shields.io/badge/license-MIT-orange.svg)](http://opensource.org/licenses/MIT)
+
 
 Tool to download thumbnails of files from Wikimedia Commons 
 
