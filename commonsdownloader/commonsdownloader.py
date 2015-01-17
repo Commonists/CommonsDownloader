@@ -26,7 +26,7 @@ def get_files_from_textfile(textfile_handler):
 def download_from_file_list(file_list, output_path):
     """Download files from a given textfile list."""
     files_to_download = get_files_from_textfile(file_list)
-    download_files(files_to_download, output_path)
+    download_files_if_not_in_cache(files_to_download, output_path)
 
 
 def get_files_from_arguments(files, width):
@@ -37,13 +37,46 @@ def get_files_from_arguments(files, width):
 def download_from_files(files, output_path, width):
     """Download files from a given file list."""
     files_to_download = get_files_from_arguments(files, width)
-    download_files(files_to_download, output_path)
+    download_files_if_not_in_cache(files_to_download, output_path)
 
 
-def download_files(files_iterator, output_path):
-    """Download the given files to the given path."""
-    for (file_name, width) in files_iterator:
-        download_file(file_name, output_path, width=width)
+def get_local_cache_path(output_path):
+    """Return the path to the local downloading cache."""
+    return os.path.join(output_path, '.cache')
+
+
+def read_local_cache(output_path):
+    """Return the contents of the local cache, as a dictionary."""
+    local_cache_path = get_local_cache_path(output_path)
+    try:
+        with open(local_cache_path, 'r') as f:
+            cache = dict(get_files_from_textfile(f))
+            logging.debug('Retrieving %s elements from cache' % len(cache))
+            return cache
+    except IOError, e:
+        return {}
+
+
+def is_file_in_cache(file_name, width, cache):
+    """Whether the given file, in its given width, is in cache."""
+    return (cache.get(file_name, '-1') == width)
+
+
+def write_file_to_cache(file_name, width, cache_fh):
+    """Write the given file on cache."""
+    cache_fh.write("%s,%s\n" % (file_name, str(width)))
+
+
+def download_files_if_not_in_cache(files_iterator, output_path):
+    """Download the given files to the given path, unless in cache."""
+    local_cache = read_local_cache(output_path)
+    with open(get_local_cache_path(output_path), 'a') as cache_fh:
+        for (file_name, width) in files_iterator:
+            if is_file_in_cache(file_name, width, local_cache):
+                logging.info('Skipping file %s' % file_name)
+                continue
+            download_file(file_name, output_path, width=width)
+            write_file_to_cache(file_name, width, cache_fh)
 
 
 class Folder(argparse.Action):
