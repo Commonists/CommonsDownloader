@@ -123,7 +123,7 @@ def download_file(image_name, output_path, width=DEFAULT_WIDTH):
     try:
         contents, output_file_name = get_thumbnail_of_file(image_name, width)
     except RequestedWidthBiggerThanSourceException:
-        logging.info("Requested width is bigger than source - downloading full size")
+        logging.warning("Requested width is bigger than source - downloading full size")
         contents, output_file_name = get_full_size_file(image_name)
     output_file_path = os.path.join(output_path, output_file_name)
     try:
