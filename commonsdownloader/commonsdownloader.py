@@ -53,7 +53,8 @@ def read_local_cache(output_path):
             cache = dict(get_files_from_textfile(f))
             logging.debug('Retrieving %s elements from cache', len(cache))
             return cache
-    except IOError, e:
+    except IOError:
+        logging.debug('No local cache at %s', local_cache_path)
         return {}
 
 
