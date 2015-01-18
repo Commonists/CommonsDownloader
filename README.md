@@ -4,8 +4,8 @@ CommonsDownloader
 [![Coverage Status](https://coveralls.io/repos/Commonists/CommonsDownloader/badge.svg?branch=master)](https://coveralls.io/r/Commonists/CommonsDownloader?branch=master)
 [![Code Health](https://landscape.io/github/Commonists/CommonsDownloader/master/landscape.svg?style=flat)](https://landscape.io/github/Commonists/CommonsDownloader/master)
 [![Documentation Status](https://readthedocs.org/projects/commonsdownloader/badge/?version=latest)](https://readthedocs.org/projects/commonsdownloader/?badge=latest)
-[![License](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](http://opensource.org/licenses/MIT)
-
+[![Pypi](https://img.shields.io/pypi/v/CommonsDownloader.svg?style=flat)](https://pypi.python.org/pypi/CommonsDownloader)
+[![License](https://img.shields.io/pypi/l/CommonsDownloader.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 Tool to download thumbnails of files from Wikimedia Commons 
 
