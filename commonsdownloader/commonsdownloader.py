@@ -3,6 +3,11 @@
 
 """Download files from Wikimedia Commons."""
 
+import sys
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 import os
 import logging
 import argparse
