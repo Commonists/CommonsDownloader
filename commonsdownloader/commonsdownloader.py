@@ -103,14 +103,15 @@ def main():
     from argparse import ArgumentParser
     description = "Download a bunch of thumbnails from Wikimedia Commons"
     parser = ArgumentParser(description=description)
-    parser.add_argument("files",
-                        nargs='*',
-                        metavar="FILES",
-                        help='A list of filenames')
-    parser.add_argument("-l", "--list", metavar="LIST",
-                        dest="file_list",
-                        type=argparse.FileType('r'),
-                        help='A list of files <filename,width>')
+    source_group = parser.add_mutually_exclusive_group()
+    source_group.add_argument("files",
+                              nargs='?',
+                              metavar="FILES",
+                              help='A list of filenames')
+    source_group.add_argument("-l", "--list", metavar="LIST",
+                              dest="file_list",
+                              type=argparse.FileType('r'),
+                              help='A list of files <filename,width>')
     parser.add_argument("-o", "--output", metavar="FOLDER",
                         dest="output_path",
                         action=Folder,
