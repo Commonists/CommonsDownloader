@@ -10,6 +10,22 @@ from thumbnaildownload import download_file, DownloadException
 from itertools import izip_longest
 
 
+def get_category_files_from_api(category_name):
+    """Yield the file names of a category by querying the MediaWiki API."""
+    import mwclient
+    site = mwclient.Site('commons.wikimedia.org')
+    category = site.Categories[category_name]
+    return (x.page_title.encode('utf-8')
+            for x in category.members(namespace=6))
+
+
+def download_from_category(category_name, output_path, width):
+    """Download files of a given category."""
+    file_names = get_category_files_from_api(category_name)
+    files_to_download = izip_longest(file_names, [], fillvalue=width)
+    download_files_if_not_in_cache(files_to_download, output_path)
+
+
 def get_files_from_textfile(textfile_handler):
     """Yield the file names and widths by parsing a text file handler."""
     for line in textfile_handler:
@@ -112,6 +128,10 @@ def main():
                               dest="file_list",
                               type=argparse.FileType('r'),
                               help='A list of files <filename,width>')
+    source_group.add_argument("-c", "--category", metavar="CATEGORY",
+                              dest="category_name",
+                              type=str,
+                              help='A category name (without prefix)')
     parser.add_argument("-o", "--output", metavar="FOLDER",
                         dest="output_path",
                         action=Folder,
@@ -143,6 +163,8 @@ def main():
 
     if args.file_list:
         download_from_file_list(args.file_list, args.output_path)
+    elif args.category_name:
+        download_from_category(args.category_name, args.output_path, args.width)
     elif args.files:
         download_from_files(args.files, args.output_path, args.width)
     else:
