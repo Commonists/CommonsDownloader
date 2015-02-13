@@ -120,10 +120,6 @@ def main():
     description = "Download a bunch of thumbnails from Wikimedia Commons"
     parser = ArgumentParser(description=description)
     source_group = parser.add_mutually_exclusive_group()
-    source_group.add_argument("files",
-                              nargs='?',
-                              metavar="FILES",
-                              help='A list of filenames')
     source_group.add_argument("-l", "--list", metavar="LIST",
                               dest="file_list",
                               type=argparse.FileType('r'),
@@ -132,6 +128,9 @@ def main():
                               dest="category_name",
                               type=str,
                               help='A category name (without prefix)')
+    parser.add_argument("files", nargs='*',
+                        metavar="FILES",
+                        help='A list of filenames')
     parser.add_argument("-o", "--output", metavar="FOLDER",
                         dest="output_path",
                         action=Folder,
