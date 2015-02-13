@@ -19,11 +19,9 @@ This tool can be used either by passing the filenames or by using a file list.
 
 Just list the files we want to download.
 
-    download_from_Wikimedia_Commons.py Example.jpg Example_ka.png
+    download_from_Wikimedia_Commons Example.jpg Example_ka.png
 
-You can set the width of the thumbnail by using the `--width` argument:
 
-    download_from_Wikimedia_Commons.py --width 50 Example.jpg Example_ka.png
 
 ### Using a file list ###
 
@@ -34,7 +32,8 @@ The file list must be formated as following, with one file per line, and `filena
 
 Then use the `--list` argument:
 
-    download_from_Wikimedia_Commons.py --list list.txt
+    download_from_Wikimedia_Commons --list list.txt
+
 
 ### Setting the output folder ###
 
@@ -42,7 +41,14 @@ By default, the tool downloads the files in the current directory.
 
 This can be changed using the `--output` flag with a valid path.
 
-    download_from_Wikimedia_Commons.py Example.jpg --output some/path/
+    download_from_Wikimedia_Commons Example.jpg --output some/path/
+
+
+### Setting the default width
+
+You can set the width of the thumbnail by using the `--width` argument:
+
+    download_from_Wikimedia_Commons Example.jpg --width 50
 
 
 ### Verbosity ###
@@ -52,15 +58,16 @@ By default, the tool display basic information its logs (through `logging`).
 You can adjust the verbosity level with the `-v` and `-q` flags:
 use `-v` to display DEBUG-level messages, `-q` to silence INFO-level messages.
 
+
 Installation
 ------------
 
-Easiest way to install is to use `pip`:
+Easiest way to install is to use `pip` from the Python Package Index:
 
-    pip install git+git://github.com/Commonists/CommonsDownloader.git#egg=CommonsDownloader
+    pip install CommonsDownloader
 
 Alternatively, you can clone the repository and install it using `setuptools`:
 
     python setup.py install
 
-This will install the executable script `download_from_Wikimedia_Commons.py`
+This will install the executable script `download_from_Wikimedia_Commons`
