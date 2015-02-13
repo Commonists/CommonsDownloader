@@ -13,7 +13,8 @@ Tool to download thumbnails of files from Wikimedia Commons
 Usage
 -----
 
-This tool can be used either by passing the filenames or by using a file list.
+This tool can be used either by passing the filenames, a category or by using a file list.
+
 
 ### Using filenames ###
 
@@ -21,6 +22,12 @@ Just list the files we want to download.
 
     download_from_Wikimedia_Commons Example.jpg Example_ka.png
 
+
+### Using a category ###
+
+Just list the files we want to download.
+
+    download_from_Wikimedia_Commons --category Example_images
 
 
 ### Using a file list ###
