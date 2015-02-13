@@ -121,17 +121,17 @@ def main():
                         type=int,
                         default=100,
                         help='The width of the thumbnail (default: 100)')
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument("-v",
-                       action="count",
-                       dest="verbose",
-                       default=1,
-                       help="Verbosity level. -v for DEBUG")
-    group.add_argument("-q", "--quiet",
-                       action="store_const",
-                       dest="verbose",
-                       const=0,
-                       help="To silence the INFO messages")
+    verbosity_group = parser.add_mutually_exclusive_group()
+    verbosity_group.add_argument("-v",
+                                 action="count",
+                                 dest="verbose",
+                                 default=1,
+                                 help="Verbosity level. -v for DEBUG")
+    verbosity_group.add_argument("-q", "--quiet",
+                                 action="store_const",
+                                 dest="verbose",
+                                 const=0,
+                                 help="To silence the INFO messages")
     args = parser.parse_args()
     logging_map = {0: logging.WARNING,
                    1: logging.INFO,
