@@ -25,7 +25,7 @@ classifiers = [
     'Topic :: Utilities'
 ]
 packages = ['commonsdownloader']
-requires = ['argparse']
+requires = ['argparse', 'mwclient', 'six']
 entry_points = {
         'console_scripts': [
             'download_from_Wikimedia_Commons = commonsdownloader.commonsdownloader:main',
