@@ -66,7 +66,7 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
     """Testing methods from thumbnaildownload which require connection."""
 
     def setUp(self):
-        """Sett up the TestCase with the data files."""
+        """Set up the TestCase with the data files."""
         self.outputfile1 = join(dirname(__file__), 'data', 'Example-100.jpg')
         self.outputfile2 = join(dirname(__file__), 'data', 'Example-50.jpg')
         self.outputfile3 = join(dirname(__file__), 'data', 'Example.jpg')
