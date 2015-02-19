@@ -32,15 +32,15 @@ class TestCommonsDownloaderExecutable(unittest.TestCase):
         expected_value = [('A', 100), ('B', 100), ('C', 100)]
         self.assertEqual(output, expected_value)
 
-    def test_get_local_cache_path(self):
-        """Test get_local_cache_path."""
-        output = commonsdownloader.get_local_cache_path('output')
-        expected_value = 'output/.cache'
+    def test_get_local_manifest_path(self):
+        """Test get_local_manifest_path."""
+        output = commonsdownloader.get_local_manifest_path('output')
+        expected_value = 'output/.manifest'
         self.assertEqual(output, expected_value)
 
-    def test_write_file_to_cache(self):
+    def test_write_file_to_manifest(self):
         fh = StringIO()
-        commonsdownloader.write_file_to_cache('Example.jpg', 100, fh)
+        commonsdownloader.write_file_to_manifest('Example.jpg', 100, fh)
         output = fh.getvalue()
         expected_value = 'Example.jpg,100\n'
         self.assertEqual(output, expected_value)
