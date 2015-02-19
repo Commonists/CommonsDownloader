@@ -26,14 +26,14 @@ class TestCommonsDownloaderOffline(unittest.TestCase):
     def test_make_thumb_url(self):
         """Test make_thumb_url."""
         input_value = ('My_Example.jpg', 100)
-        expected_value = "http://commons.wikimedia.org/w/thumb.php?f=My_Example.jpg&width=100"
+        expected_value = "http://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=My_Example.jpg&width=100"
         output = thumbnaildownload.make_thumb_url(*input_value)
         self.assertEqual(output, expected_value)
 
     def test_make_thumb_url_with_ampersand(self):
         """Test make_thumb_url with an ampersand character."""
         input_value = ('My_Example2&3.jpg', 100)
-        expected_value = "http://commons.wikimedia.org/w/thumb.php?f=My_Example2%263.jpg&width=100"
+        expected_value = "http://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=My_Example2%263.jpg&width=100"
         output = thumbnaildownload.make_thumb_url(*input_value)
         self.assertEqual(output, expected_value)
 
@@ -83,8 +83,9 @@ class TestCommonsDownloaderOnline(unittest.TestCase):
     def test_get_thumbnail_of_file_higher_than_possible(self):
         """Test get_thumbnail_of_file with a size larger than available."""
         input_value = ('Example.jpg', 1000)
-        with self.assertRaises(thumbnaildownload.RequestedWidthBiggerThanSourceException):
-            _ = thumbnaildownload.get_thumbnail_of_file(*input_value)
+        expected_value = (open(self.outputfile3).read(), 'Example.jpg')
+        output = thumbnaildownload.get_thumbnail_of_file(*input_value)
+        self.assertEqual(output, expected_value)
 
     def test_get_thumbnail_of_non_existing_file(self):
         """Test get_thumbnail_of_file with a non-existing file."""
