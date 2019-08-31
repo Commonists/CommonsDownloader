@@ -6,7 +6,7 @@
 import os
 import logging
 import argparse
-from thumbnaildownload import download_file, DownloadException
+from commonsdownloader.thumbnaildownload import download_file, DownloadException
 
 from itertools import zip_longest
 
