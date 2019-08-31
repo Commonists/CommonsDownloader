@@ -4,9 +4,8 @@
 
 import os
 import re
-import urllib2
 import logging
-
+import urllib
 
 DEFAULT_WIDTH = 100
 
@@ -41,13 +40,15 @@ class CouldNotWriteFileOnDiskException(DownloadException):
 
 def clean_up_filename(file_name):
     """Return the cleaned-up file title."""
-    return file_name.strip().replace(' ', '_')
+    file_name = file_name.strip()
+    file_name = file_name.replace(' ', '_')
+    return file_name
 
 
 def make_thumb_url(image_name, width):
     """Return the URL to the thumbnail of the file, at the given width."""
     base_url = "http://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=%s&width=%s"
-    return base_url % (urllib2.quote(image_name), width)
+    return base_url % (urllib.parse.quote(image_name), width)
 
 
 def make_full_size_url(image_name):
@@ -72,13 +73,14 @@ def get_thumbnail_of_file(image_name, width):
     """Return the file contents of the thumbnail of the given file."""
     hdr = {'User-Agent': 'Python urllib2'}
     url = make_thumb_url(image_name, width)
-    req = urllib2.Request(url, headers=hdr)
+    req = urllib.request.Request(url, headers=hdr)
     try:
         logging.debug("Retrieving %s", url)
-        opened = urllib2.urlopen(req)
-        extension = opened.headers.subtype
-        return opened.read(), make_thumbnail_name(image_name, extension)
-    except urllib2.HTTPError, e:
+        opened = urllib.request.urlopen(req)
+        extension = opened.info().get_content_subtype()
+        contents = opened.read()
+        return contents, make_thumbnail_name(image_name, extension)
+    except urllib.error.HTTPError as e:
         message = e.fp.read()
         raise get_exception_based_on_api_message(message, image_name)
 
@@ -87,13 +89,13 @@ def get_full_size_file(image_name):
     """Return the file contents of given file at full size."""
     hdr = {'User-Agent': 'Python urllib2'}
     url = make_full_size_url(image_name)
-    req = urllib2.Request(url, headers=hdr)
+    req = urllib.request.Request(url, headers=hdr)
     try:
         logging.debug("Retrieving %s", url)
-        opened = urllib2.urlopen(req)
-        extension = opened.headers.subtype
+        opened = urllib.request.urlopen(req)
+        extension = opened.info().get_content_subtype()
         return opened.read(), make_thumbnail_name(image_name, extension)
-    except urllib2.HTTPError, e:
+    except urllib.error.HTTPError as e:
         message = e.fp.read()
         raise get_exception_based_on_api_message(message, image_name)
 
@@ -131,12 +133,12 @@ def download_file(image_name, output_path, width=DEFAULT_WIDTH):
             logging.debug("Writing as %s", output_file_path)
             f.write(contents)
         return output_file_path
-    except IOError, e:
+    except IOError as e:
         msg = 'Could not write file %s on disk to %s: %s' % \
               (image_name, output_path, e.message)
         logging.error(msg)
         raise CouldNotWriteFileOnDiskException(msg)
-    except Exception, e:
+    except Exception as e:
         logging.critical(e.message)
         msg = 'An unexpected error occured when downloading %s to %s: %s' % \
               (image_name, output_path, e.message)
