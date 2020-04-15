@@ -102,7 +102,7 @@ def get_exception_based_on_api_message(message, image_name=""):
     """Return the exception matching the given API error message."""
     msg_bigger_than_source = re.compile('Image was not scaled, is the requested width bigger than the source?')
     msg_does_not_exist = re.compile('The source file .* does not exist')
-    msg_does_not_exist_bis = re.compile('<div class="error"><p>Value not found')
+    msg_does_not_exist_bis = re.compile("Value not found")
     if re.search(msg_bigger_than_source, message):
         msg = "File %s requested at a width bigger than source" % image_name
         return RequestedWidthBiggerThanSourceException(msg)
