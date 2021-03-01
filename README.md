@@ -20,14 +20,14 @@ This tool can be used either by passing the filenames, a category or by using a 
 
 Just list the files we want to download.
 
-    download_from_Wikimedia_Commons Example.jpg Example_ka.png
+    wmcdl Example.jpg Example_ka.png
 
 
 ### Using a category ###
 
 Just list the files we want to download.
 
-    download_from_Wikimedia_Commons --category Example_images
+    wmcdl --category Example_images
 
 
 ### Using a file list ###
@@ -39,7 +39,7 @@ The file list must be formated as following, with one file per line, and `filena
 
 Then use the `--list` argument:
 
-    download_from_Wikimedia_Commons --list list.txt
+    wmcdl --list list.txt
 
 
 ### Setting the output folder ###
@@ -48,14 +48,14 @@ By default, the tool downloads the files in the current directory.
 
 This can be changed using the `--output` flag with a valid path.
 
-    download_from_Wikimedia_Commons Example.jpg --output some/path/
+    wmcdl Example.jpg --output some/path/
 
 
 ### Setting the default width
 
 You can set the width of the thumbnail by using the `--width` argument:
 
-    download_from_Wikimedia_Commons Example.jpg --width 50
+    wmcdl Example.jpg --width 50
 
 
 ### Verbosity ###
@@ -77,4 +77,4 @@ Alternatively, you can clone the repository and install it using `setuptools`:
 
     python setup.py install
 
-This will install the executable script `download_from_Wikimedia_Commons`
+This will install the executable script `wmcdl`
