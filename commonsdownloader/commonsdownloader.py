@@ -3,16 +3,12 @@
 
 """Download files from Wikimedia Commons."""
 
-import sys
-
-reload(sys)
-sys.setdefaultencoding("utf-8")
-
 import os
 import logging
 import argparse
-from thumbnaildownload import download_file, DownloadException
-from itertools import izip_longest
+from commonsdownloader.thumbnaildownload import download_file, DownloadException
+
+from itertools import zip_longest
 
 
 def get_category_files_from_api(category_name):
@@ -20,14 +16,13 @@ def get_category_files_from_api(category_name):
     import mwclient
     site = mwclient.Site('commons.wikimedia.org')
     category = site.Categories[category_name]
-    return (x.page_title.encode('utf-8')
-            for x in category.members(namespace=6))
+    return (x.page_title for x in category.members(namespace=6))
 
 
 def download_from_category(category_name, output_path, width):
     """Download files of a given category."""
     file_names = get_category_files_from_api(category_name)
-    files_to_download = izip_longest(file_names, [], fillvalue=width)
+    files_to_download = zip_longest(file_names, [], fillvalue=width)
     download_files_if_not_in_manifest(files_to_download, output_path)
 
 
@@ -52,7 +47,7 @@ def download_from_file_list(file_list, output_path):
 
 def get_files_from_arguments(files, width):
     """Yield the file names and chosen width."""
-    return izip_longest(files, [], fillvalue=width)
+    return zip_longest(files, [], fillvalue=width)
 
 
 def download_from_files(files, output_path, width):
@@ -101,7 +96,7 @@ def download_files_if_not_in_manifest(files_iterator, output_path):
             try:
                 download_file(file_name, output_path, width=width)
                 write_file_to_manifest(file_name, width, manifest_fh)
-            except DownloadException, e:
+            except DownloadException as e:
                 logging.error("Could not download %s: %s", file_name, e.message)
 
 
