@@ -101,7 +101,7 @@ def download_files_if_not_in_manifest(files_iterator, output_path):
             try:
                 download_file(file_name, output_path, width=width)
                 write_file_to_manifest(file_name, width, manifest_fh)
-            except DownloadException, e:
+            except(DownloadException, e):
                 logging.error("Could not download %s: %s", file_name, e.message)
 
 
